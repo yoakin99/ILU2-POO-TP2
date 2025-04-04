@@ -30,6 +30,11 @@ public class ControlAcheterProduit {
 	}
 
 	public int acheterProduit(String produit, int nbProduit, int rang) {
+		Gaulois[] listeGaulois = village.rechercherVendeursProduit(produit);
+		System.out.println(listeGaulois.length);
+		if (!(0 <= rang && rang < listeGaulois.length)) {
+			return 0;
+		}
 		Gaulois gaulois = (village.rechercherVendeursProduit(produit))[rang];
 		Etal etal = village.rechercherEtal(gaulois);
 		return etal.acheterProduit(nbProduit);

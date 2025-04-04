@@ -34,7 +34,7 @@ public class Village {
 
 	public Gaulois trouverHabitant(String nomGaulois) {
 		Gaulois gaulois = null;
-		if (nomGaulois.equals(chef.getNom())) {
+		if (chef!=null && nomGaulois.equals(chef.getNom())) {
 			gaulois = chef;
 		} else {
 			for (int i = 0; i < nbVillageois; i++) {
@@ -100,6 +100,8 @@ public class Village {
 			for (int i = 0; i < etalsProduit.length; i++) {
 				vendeurs[i] = etalsProduit[i].getVendeur();
 			}
+		} else {
+			return new Gaulois[0];
 		}
 		return vendeurs;
 	}
@@ -161,6 +163,8 @@ public class Village {
 						nbEtalTrouve++;
 					}
 				}
+			} else {
+				return new Etal[0];
 			}
 			return etalsProduitsRecherche;
 		}
@@ -170,9 +174,9 @@ public class Village {
 			Etal etalVendeur = null;
 			for (int i = 0; i < etals.length && !vendeurTrouve; i++) {
 				Gaulois vendeur = etals[i].getVendeur();
-				if (vendeur != null) {
+				if (vendeur != null && etals[i].isEtalOccupe()) {
 					vendeurTrouve = vendeur.getNom().equals(gaulois.getNom());
-					if (vendeurTrouve) {
+					if (vendeurTrouve ) {
 						etalVendeur = etals[i];
 					}
 				}
